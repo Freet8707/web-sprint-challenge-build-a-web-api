@@ -81,8 +81,26 @@ router.put("/:id", (req, res) => {
                 res.status(500).json({ errorMessage: "There was an error making that update!" })
             })
     };
-    
+
 })
+
 //delete
+
+router.delete("/:id", (req, res) => {
+    const { id } = req.params;
+
+    if(id){
+        projectModel.remove(id)
+            .then(response => {
+                res.status(204).json({ message: "project deleted O_o" })
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(500).json({ errorMessage: "There was an error deleting that resource" })
+            })
+    } else {
+        return res.status(400).json({ message: "There was no project id provided!" })
+    }
+})
 
 module.exports = router;
