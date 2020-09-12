@@ -32,7 +32,22 @@ router.get("/", (req, res) => {
         })
 })
 //update
+router.put("/:id", (req, res) => {
+    const { id } = req.params;
 
+    if(!req.body.project_id || !req.body.description || !req.body.notes){
+        return res.status(400).json({ message: "There must be an id for the project the action is assigned to, a description, and notes provided in order to update an action" })
+    } else {
+        actionModel.update(id, req.body)
+            .then(response => {
+                res.status(201).json(response)
+            })
+            .catch(error => {
+                console.log(error)
+                res.status(500).json({ errorMessage: "There was an error updating that action!" })
+            })
+    }
+})
 //delete
 
 module.exports = router
