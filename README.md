@@ -60,6 +60,8 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
+ALL THE ANSWERS ARE WRITTEN WITHIN THE ANSWERS.JS FILE IN THE ROOT DIRECTORY  
+
 1. The core features of Node.js and Express and why they are useful.
 1. Understand and explain the use of Middleware?
 1. The basic principles of the REST architectural style.
