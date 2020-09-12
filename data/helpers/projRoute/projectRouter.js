@@ -7,7 +7,7 @@ const router = express.Router();
 //create
 
 router.post("/", (req, res) => {
-    
+
     if(!req.body.name || !req.body.description){
         res.status(400).json({ message: "Please include both a name and description" })
     } else {
@@ -25,7 +25,8 @@ router.post("/", (req, res) => {
 
 //read
 router.get("/", (req, res) => {
-    projectModel.get()
+    if(req.body.id){
+        projectModel.get(req.body.id)
         .then(data => {
             res.status(200).json(data)
         })
@@ -33,6 +34,24 @@ router.get("/", (req, res) => {
             console.log(error)
             res.status(500).json({ errorMessage: "there was an error retrieving the data !" })
         })
+    } else {
+        projectModel.get()
+        .then(data => {
+            res.status(200).json(data)
+        })
+        .catch(error => {
+            console.log(error)
+            res.status(500).json({ errorMessage: "there was an error retrieving the data !" })
+        })
+    }
+    // projectModel.get()
+    //     .then(data => {
+    //         res.status(200).json(data)
+    //     })
+    //     .catch(error => {
+    //         console.log(error)
+    //         res.status(500).json({ errorMessage: "there was an error retrieving the data !" })
+    //     })
 })
 //update 
 
