@@ -24,6 +24,7 @@ router.post("/", (req, res) => {
 })
 
 //read
+
 router.get("/", (req, res) => {
     if(req.body.id){
         projectModel.get(req.body.id)
@@ -44,14 +45,22 @@ router.get("/", (req, res) => {
             res.status(500).json({ errorMessage: "there was an error retrieving the data !" })
         })
     }
-    // projectModel.get()
-    //     .then(data => {
-    //         res.status(200).json(data)
-    //     })
-    //     .catch(error => {
-    //         console.log(error)
-    //         res.status(500).json({ errorMessage: "there was an error retrieving the data !" })
-    //     })
+
+})
+// get request for returning all actions on a particular project
+router.get("/:id", (req, res) => {
+    const { id } = req.params;
+
+    if(id){
+        projectModel.getProjectActions(id)
+            .then(response => {
+                res.status(200).json(response)
+            })
+            .catch(error => {
+                console.log("Error: ", error)
+                res.status(500).json({ errorMessage: "There was an error retrieving that data :_(" })
+            })
+    }
 })
 //update 
 
