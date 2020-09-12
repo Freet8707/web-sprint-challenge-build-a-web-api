@@ -20,6 +20,8 @@ const cors = require("cors");
 
 const projectRouter = require("./data/helpers/projRoute/projectRouter");
 
+const actionsRouter = require("./data/helpers/actionsRoute/actionsRouter")
+
 const port = 4000;
 
 const server = express();
@@ -31,6 +33,8 @@ server.use(express.json());
 server.use(cors());
 
 server.use("/api/projects", projectRouter);
+
+server.use("/api/actions", actionsRouter)
 
 server.get("/", (req, res) => {
     res.status(200).json({ message: "server up and running" })
