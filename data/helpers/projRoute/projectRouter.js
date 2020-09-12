@@ -64,6 +64,25 @@ router.get("/:id", (req, res) => {
 })
 //update 
 
+router.put("/:id", (req, res) => {
+    const { id } = req.params;
+
+    if(!req.body.name || !req.body.description){
+        return res.status(400).json({ message: "Please provide a name and a description for the project to be updated!" })
+    };
+
+    if(id){
+        projectModel.update(id, req.body)
+            .then(response => {
+                res.status(201).json(response)
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(500).json({ errorMessage: "There was an error making that update!" })
+            })
+    };
+    
+})
 //delete
 
 module.exports = router;
