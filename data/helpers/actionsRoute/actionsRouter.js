@@ -49,5 +49,17 @@ router.put("/:id", (req, res) => {
     }
 })
 //delete
+router.delete("/:id", (req, res) => {
+    const { id } = req.params;
+
+    actionModel.remove(id)
+        .then(response => {
+            res.status(204).json({ message: "Boom! Action gone!" })
+        })
+        .catch(error => {
+            console.log("Error: ", error)
+            res.status(500).json({ errorMessage: "The delete was unsuccessful! :_(" })
+        })
+})
 
 module.exports = router
